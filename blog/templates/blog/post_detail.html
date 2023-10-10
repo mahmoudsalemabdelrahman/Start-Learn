@@ -1,0 +1,94 @@
+
+
+
+{% extends "base2.html" %}
+{% load static %}
+
+{% block title %}
+  {{post.title}}
+{% endblock title %}
+  
+
+{% block header %}
+{% if post.bg_image %}
+    <header class="masthead" style="background-image: url('{{post.bg_image.url}}')">
+
+{% else %}
+    <header class="masthead" style="background-image: url('{% static 'assets/img/post-bg.jpg' %}')">
+
+{% endif %}
+
+  <div class="container position-relative px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-md-10 col-lg-8 col-xl-7">
+              <div class="post-heading">
+                  <h1>{{post.title}}</h1>
+                  <span class="meta">
+                      Posted by
+                      <a href="#!">{{post.author.first_name|capfirst|default:post.author.username}}</a>
+                      {{post.publish}}
+                  </span>
+              </div>
+          </div>
+      </div>
+  </div>
+</header>
+{% endblock header %}
+  
+
+{% block content %}
+    <article class="mb-4">
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <p>{{post.body}}</p>
+                    {% if post.post_image %}
+                          <a href="#!">
+                            <img class="img-fluid" src="{{post.post_image.url}}" alt="..." />
+                          </a>
+
+                    {% else %}
+                        <a href="#!">
+                          <img class="img-fluid" src="{% static 'assets/img/post-sample-image.jpg' %}" alt="..." />
+                        </a>
+                    {% endif %}
+
+                   
+            </div>
+        </div>
+    </article>
+
+
+    <div class="container px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+          <div class="col-md-10 col-lg-8 col-xl-7">
+            <p>Please write your comments and let us know about what you think about this post</p>
+            
+              {% with comments.count as total_comments %}
+                   <h2>{{total_comments}} comment {{total_comments|pluralize}}</h2>                
+              {% endwith %}
+
+              {% for comment in comments %}
+                  <div class=" card bg-light mt-3 py-2 px-3">
+                    <a class="fw-semibold text-decoration-none "> Comment by <span class="text-primary ">{{comment.name}}</span> at {{comment.created_at}}</a>
+                    <div class="card-body py-2 px-3">
+                    {{comment.body|linebreaks}}
+                    </div>
+                  </div>
+              {% empty%}
+                   <p> there are  no comments</p>
+              {% endfor %}
+          </div>
+      </div>
+
+    </div>
+
+
+
+{% endblock content %}
+
+{% block comment %}
+   
+ {% include "includes/comment_form.html" %}
+{% endblock comment %}
+    

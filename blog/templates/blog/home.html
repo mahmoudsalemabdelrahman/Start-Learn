@@ -1,0 +1,66 @@
+
+{% extends "base.html" %}
+
+
+
+{% block title %}
+    My Blog | Home
+{% endblock title %}
+{% block content %}
+
+    
+    {% for post in page_obj %}
+        
+        
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <!-- Post preview-->
+                <div class="post-preview">
+                    <a href="{{post.get_absolute_url}}">
+                        <h2 class="post-title">{{post.title}}</h2>
+                        <h3 class="post-subtitle">{{post.body|truncatechars:30}}</h3>
+                    </a>
+                    <p class="post-meta">
+                        Posted by
+                        <a href="#!">{{post.author.first_name|capfirst|default:post.author.username}}</a>
+                        {{post.publish}}
+                    </p>
+                </div>
+                <!-- Divider-->
+                <hr class="my-4" />
+                <!-- Post preview-->
+           
+            </div>
+        </div>
+    </div>
+
+
+
+    {% endfor %}
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5 justify-content-center">
+            <div class="col-md-10 col-lg-8 col-xl-7">
+                <!-- روابط التنقل بين الصفحات -->
+                <div class="pagination justify-content-center text-center m-aut">
+                    <span class="step-links  ">
+                        {% if page_obj.has_previous %}
+                            <a href="?page=1">&laquo; الأولى</a>
+                            <a href="?page={{ page_obj.previous_page_number }}">السابقة</a>
+                        {% endif %}
+
+                        <span class="current-page">{{ page_obj.number }}</span>
+
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}">التالية</a>
+                            <a href="?page={{ page_obj.paginator.num_pages }}">الأخيرة &raquo;</a>
+                        {% endif %}
+                    </span>
+                </div>
+        </div>
+    </div>
+</div>
+
+    
+{% endblock content %}
+    

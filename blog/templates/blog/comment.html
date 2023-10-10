@@ -1,0 +1,9 @@
+
+{% load bootstrap5 %}
+
+{% if comment %}
+<P> Your comment was created..</P>
+<a href="{{post.get_absolute_url}}">Back to uour post</a>
+{% else %}
+{% include 'includes/comment_form.html' %}
+{% endif %}
