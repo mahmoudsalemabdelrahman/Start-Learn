@@ -23,8 +23,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 
-env = environ.Env()
-environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+# env = environ.Env()
+# environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -32,7 +32,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 # SECURITY WARNING: keep the secret key used in production secret!
 
 
-SECRET_KEY = os.environ.get("SECRET_KEY", default='django-insecure-+d$&#uwv%j31zlm&f7qz63su&im1k8z5)6aou!%yt02(=+&sdm')
+SECRET_KEY = os.environ.get("SECRET_KEY", default='255555assxc2555')
 
 
 #  django-insecure-+d$&#uwv%j31zlm&f7qz63su&im1k8z5)6aou!%yt02(=+&sdm
@@ -96,7 +96,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
-CORS_ALLOWED_ORIGINS=True
+CORS_ALLOWED_ORIGIN_REGEXES=True
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -114,10 +114,9 @@ DATABASES = {
 
 
 DATABASES = {
-    'default': dj_database_url.config(
-        conn_max_age=600,
-        conn_health_checks=True,
-    ),
+    'default': dj_database_url.config(  
+              default='postgres://start_db_user:L3aaz2pHMndyxatH9OeFhqezKfKLNUkf@dpg-ckij544e1qns73fo7aj0-a.ohio-postgres.render.com/start_db',     
+              conn_max_age=600)
 }
 
 # Password validation
