@@ -9,44 +9,26 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-import environ
+
 from pathlib import Path
 import os
-import dj_database_url
-from django.core.exceptions import ImproperlyConfigured
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-
-
-
-# env = environ.Env()
-# environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-
-
-SECRET_KEY = os.environ.get("SECRET_KEY", default='255555assxc2555')
-
-
-#  django-insecure-+d$&#uwv%j31zlm&f7qz63su&im1k8z5)6aou!%yt02(=+&sdm
-
-
+SECRET_KEY = 'django-insecure-+d$&#uwv%j31zlm&f7qz63su&im1k8z5)6aou!%yt02(=+&sdm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'RENDER' not in os.environ
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-if RENDER_EXTERNAL_HOSTNAME:
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -61,14 +43,11 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'django_bootstrap5',
     'contact',
-    ###' 
-    'corsheaders',
     ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -96,28 +75,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'project.wsgi.application'
 
-CORS_ALLOWED_ORIGIN_REGEXES=True
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-'''
 
-# Render PostgreSQL Database 
-
-
-
-DATABASES = {
-    'default': dj_database_url.config(  
-              default='postgres://start_db_user:L3aaz2pHMndyxatH9OeFhqezKfKLNUkf@dpg-ckij544e1qns73fo7aj0-a.ohio-postgres.render.com/start_db',     
-              conn_max_age=600)
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
